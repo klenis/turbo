@@ -3,8 +3,12 @@ import { dispatch } from "../../util"
 import { PageRenderer } from "./page_renderer"
 
 export class MorphRenderer extends PageRenderer {
+  static renderElement(currentElement, newElement) {
+    this.#morphBody(this.currentElement, this.newElement)
+  }
+  
   async render() {
-    if (this.willRender) await this.#morphBody()
+    if (this.willRender) await this.renderElement(this.currentElement, this.newElement)
   }
 
   get renderMethod() {
